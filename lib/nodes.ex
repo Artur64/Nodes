@@ -30,7 +30,7 @@ defmodule Nodes do
   end
 
   @doc """
-    A function that returns the state of a given node. Either returns node state or {:error, message}
+    A function, that returns the state of a given node. Either returns node state or {:error, message}
   """
   @spec get_state(integer()) :: Nodes.t() | {:error, String.t()}
   def get_state(id) when is_integer(id) do
@@ -45,7 +45,7 @@ defmodule Nodes do
   end
 
   @doc """
-    A function that simply terminates the given node by its id.
+    A function, that simply terminates the given node by its id.
   """
   @spec kill_node(pid() | integer()) :: boolean()
   def kill_node(id) when is_integer(id) do
@@ -54,7 +54,7 @@ defmodule Nodes do
   end
 
   @doc """
-    A function which simply terminates given process by its process id.
+    A function, which simply terminates given process by its process id.
   """
   def kill_node(pid) when is_pid(pid) do
     Process.exit(pid, :kill)
@@ -71,7 +71,6 @@ defmodule Nodes do
         send(from, {state.pid, state})
         loop(state)
 
-      ### BACK-END
       {:alive?, from} when is_pid(from) ->
         list_of_states = :ets.foldr(fn {_k, v}, acc -> [v | acc] end, [], @table_name)
 
