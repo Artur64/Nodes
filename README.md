@@ -1,21 +1,18 @@
-# ElixirTest
+# Elixir Nodes
 
-**TODO: Add description**
+ Elixir Nodes task implementation
+## Prerequisities
+ [Erlang OTP 21](http://erlang.org/doc/installation_guide/INSTALL.html)+ and [Elixir 1.8.1](https://elixir-lang.org/install.html)+
 
-## Installation
+## Configure it: 
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `elixir_test` to your list of dependencies in `mix.exs`:
+The application is configurable, the possible configurations are: 
 
-```elixir
-def deps do
-  [
-    {:elixir_test, "~> 0.1.0"}
-  ]
-end
-```
+- `default_timeout` - Timeout in ms, default value is `500`.
+- `max_timeout_multiplier` - Timeout multiplier, default value is `4`
+- `table_name` - The name of ETS table, default name is `:state`
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/elixir_test](https://hexdocs.pm/elixir_test).
-
+## Usage: 
+ - `Nodes.new_node 1` - takes integers as IDs. Tries to create a new node. Returns `elixir{:ok, {node_id, node_pid}}` or `{:error,reason}`   
+ - `Nodes.get_state 1` - takes given `ID` and if the given node exists, returns the `state` of the node, or `{:error, reason}`.
+ - `Nodes.kill_node 1` - tries to terminate the node by given `ID`. Returns either `true` if the node was killed, or `false` if not (possibly because it was killed by someone else or just did not exist).

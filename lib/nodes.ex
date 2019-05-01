@@ -45,6 +45,14 @@ defmodule Nodes do
   end
 
   @doc """
+    A function, that returns current state of all nodes.
+  """
+  @spec get_all_states() :: List.t()
+  def get_all_states() do
+    :ets.foldr(fn elem, acc -> [elem | acc] end, [], @table_name)
+  end
+
+  @doc """
     A function, that simply terminates the given node by its id.
   """
   @spec kill_node(pid() | integer()) :: boolean()
